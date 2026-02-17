@@ -1,30 +1,18 @@
 import 'package:pox/models/note.dart';
 
-class NoteRepository {
-  List<Note> _notes = [];
-
+abstract class NoteRepository {
   ///добавить заметку
-  Note addNote(String title, String content, List<String> tags) {
-    throw UnimplementedError();
-  }
+  Note addNote(String title, String content, List<String> tags);
 
   ///удалить заметку
-  void delNote(int id) {
-    throw UnimplementedError();
-  }
+  void delNote(int id);
 
   ///поиск по тексту
-  List<Note> searchTXT(String searchTXT) {
-    throw UnimplementedError();
-  }
+  List<Note> searchTXT(String searchTXT);
 
   ///сортировка заметок
-  List<Note> sort() {
-    throw UnimplementedError();
-  }
+  List<Note> sort();
 
   ///поиск по айди
-  Note? ID(int id) {
-    throw UnimplementedError();
-  }
+  Note? ID(int id);
 }
