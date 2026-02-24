@@ -1,8 +1,11 @@
+// это класс заметок он нужен для создания обьектов типа заметки они включают в себя айди имя текст время создания и обновления а также теги  и проверку на любимость
+//этот класс обладает проверками  геттерами и сеттерами
+
 class Note {
-  int _id;
+  final int _id;
   String _title;
   String _content;
-  DateTime _createdAt;
+  final DateTime _createdAt;
   DateTime _updatedAt;
   List<String> _tags;
   bool _isFavorite;

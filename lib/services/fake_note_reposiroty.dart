@@ -1,20 +1,26 @@
-import 'dart:math';
+// это репозитроий позволяющий работать с классом напрямую делает все что и делает класс
+//
+//
+//
 
+import 'dart:math';
 import 'package:pox/models/note.dart';
 import 'package:pox/services/note_repository.dart';
 
 class FakeNoteReposiroty extends NoteRepository {
-  List<Note> _notes = [];
+  final List<Note> _notes = [];
 
   @override
+  // ignore: non_constant_identifier_names
   Note? ID(int id) {
-    Note note_id = _notes.firstWhere((test) => test.id == id);
+    Note noteId = _notes.firstWhere((test) => test.id == id);
 
-    return note_id;
+    return noteId;
   }
 
   @override
   Note addNote(String title, String content, List<String> tags) {
+    // ignore: non_constant_identifier_names
     Note Fnote = Note(Random().nextInt(10000), title, content, DateTime.now(),
         DateTime.now(), tags, false);
 
@@ -39,7 +45,7 @@ class FakeNoteReposiroty extends NoteRepository {
 
   @override
   List<Note> sort() {
-    // TODO: implement sort
-    throw UnimplementedError();
+    _notes.sort((a, b) => a.title.length.compareTo(b.title.length));
+    return _notes;
   }
 }

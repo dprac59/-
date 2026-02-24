@@ -1,3 +1,9 @@
+//репозиторий сделанный на основе абстрактного класс для определения
+//работы какую должен выполнять итогвый код
+//
+//
+//
+
 import 'package:pox/models/note.dart';
 
 abstract class NoteRepository {
