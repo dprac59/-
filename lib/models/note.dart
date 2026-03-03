@@ -1,6 +1,10 @@
 // это класс заметок он нужен для создания обьектов типа заметки они включают в себя айди имя текст время создания и обновления а также теги  и проверку на любимость
 //этот класс обладает проверками  геттерами и сеттерами
 
+import 'dart:math';
+
+var random = Random();
+
 class Note {
   final int _id;
   String _title;
@@ -20,6 +24,15 @@ class Note {
         _isFavorite = isFavorite,
         _tags = tags,
         _updatedAt = updatedAt;
+
+  Note.no_data(String title, String content, List<String> tags, bool isFavorite)
+      : _content = content,
+        _title = title,
+        _tags = tags,
+        _isFavorite = isFavorite,
+        _id = random.nextInt(1000000000000000000),
+        _createdAt = DateTime.now(),
+        _updatedAt = DateTime.now();
 
   int get id => _id;
   String get title => _title;

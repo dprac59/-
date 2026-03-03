@@ -37,7 +37,7 @@ class FakeNoteReposiroty extends NoteRepository {
   @override
   List<Note> searchTXT(String searchTXT) {
     List<Note> searchnote = _notes.where((test) {
-      String str = test.title + " " + test.content;
+      String str = "${test.title} ${test.content}";
       return str.contains(searchTXT);
     }).toList();
     return searchnote;
@@ -46,6 +46,10 @@ class FakeNoteReposiroty extends NoteRepository {
   @override
   List<Note> sort() {
     _notes.sort((a, b) => a.title.length.compareTo(b.title.length));
+    return _notes;
+  }
+
+  List<Note> getAll() {
     return _notes;
   }
 }
