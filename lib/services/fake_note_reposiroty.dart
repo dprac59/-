@@ -8,7 +8,7 @@ import 'package:pox/models/note.dart';
 import 'package:pox/services/note_repository.dart';
 
 class FakeNoteReposiroty extends NoteRepository {
-  final List<Note> _notes = [];
+  final List<Note> _notes = [Note.no_data("qwe", "saddasdasdasasd", [], false)];
 
   @override
   // ignore: non_constant_identifier_names

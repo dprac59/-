@@ -30,7 +30,7 @@ class Note {
         _title = title,
         _tags = tags,
         _isFavorite = isFavorite,
-        _id = random.nextInt(1000000000000000000),
+        _id = random.nextInt(1000000),
         _createdAt = DateTime.now(),
         _updatedAt = DateTime.now();
 
@@ -58,5 +58,12 @@ class Note {
   bool get isFavorite => _isFavorite;
   set isFavorite(bool boolingText) {
     _isFavorite = boolingText;
+  }
+
+  @override
+  String toString() {
+    return """------------
+  Note  $_title
+------------""";
   }
 }
