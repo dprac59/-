@@ -4,8 +4,9 @@ import 'dart:io';
 
 import 'package:pox/models/note.dart';
 import 'package:pox/services/fake_note_reposiroty.dart';
+import 'package:pox/services/file_note_repository.dart';
 
-FakeNoteReposiroty fakeNoteReposiroty = FakeNoteReposiroty();
+FileNoteRepository fakeNoteReposiroty = FileNoteRepository();
 void main() {
   int answer;
   bool isWork = true;
@@ -61,6 +62,7 @@ void create() {
     isfavoriteThere = false;
   }
   Note.no_data(name, text, tagList, isfavoriteThere);
+  fakeNoteReposiroty.addNote(name, text, tagList);
 }
 
 bool askUser(String question) {

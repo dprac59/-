@@ -34,6 +34,17 @@ class Note {
         _createdAt = DateTime.now(),
         _updatedAt = DateTime.now();
 
+  factory Note.fromJson(Map<String, Object?> jsonMap) {
+    return Note(
+        jsonMap["id"] as int,
+        jsonMap["name"] as String,
+        jsonMap["content"] as String,
+        DateTime.parse(jsonMap["createdAt"] as String),
+        DateTime.parse(jsonMap["updatedAt"] as String),
+        (jsonMap["tags"] as List<dynamic>).map((e) => e.toString()).toList(),
+        jsonMap["isFavorite"] as bool);
+  }
+
   int get id => _id;
   String get title => _title;
   set title(String titleText) {
@@ -58,6 +69,18 @@ class Note {
   bool get isFavorite => _isFavorite;
   set isFavorite(bool boolingText) {
     _isFavorite = boolingText;
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": title,
+      "id": id,
+      "content": content,
+      "createdAt": createdAt.toIso8601String(),
+      "updatedAt": updatedAt.toIso8601String(),
+      "tags": tags,
+      "isFavorite": isFavorite,
+    };
   }
 
   @override

@@ -21,4 +21,6 @@ abstract class NoteRepository {
 
   ///поиск по айди
   Note? ID(int id);
+
+  List<Note> getAll();
 }
