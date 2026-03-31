@@ -11,6 +11,12 @@ class FakeNoteReposiroty extends NoteRepository {
   final List<Note> _notes = [Note.no_data("qwe", "saddasdasdasasd", [], false)];
 
   @override
+  Note edit(int id, String newText) {
+    // TODO: implement edit
+    throw UnimplementedError();
+  }
+
+  @override
   // ignore: non_constant_identifier_names
   Note? ID(int id) {
     Note noteId = _notes.firstWhere((test) => test.id == id);

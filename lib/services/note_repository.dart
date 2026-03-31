@@ -23,4 +23,6 @@ abstract class NoteRepository {
   Note? ID(int id);
 
   List<Note> getAll();
+
+  Note edit(int id, String newText);
 }
