@@ -4,16 +4,15 @@
 //
 import 'dart:convert';
 import "dart:io";
-import 'dart:math';
 import 'package:pox/models/note.dart';
 import 'package:pox/services/note_repository.dart';
 
 class FileNoteRepository extends NoteRepository {
-  FileNoteRepository() {}
+  FileNoteRepository();
 
   @override
+  // ignore: non_constant_identifier_names
   Note? ID(int id) {
-    // TODO: implement ID
     throw UnimplementedError();
   }
 
@@ -21,46 +20,76 @@ class FileNoteRepository extends NoteRepository {
   Note addNote(String title, String content, List<String> tags) {
     Note note = Note.no_data(title, content, tags, false);
 
-    File note_create = File("./$title.json");
-    print(note_create.create());
-    note_create.writeAsString(json.encode(note.toJson()));
+    File noteCreate = File("./$title.json");
+    print(noteCreate.create());
+    noteCreate.writeAsString(json.encode(note.toJson()));
+    return note;
+  }
+
+  @override
+  List<Note> searchTXT(String searchTXT) {
+    var notes = getAll();
+    List<Note> searchnote = notes.where((test) {
+      String str = "${test.title} ${test.content}";
+      return str.contains(searchTXT);
+    }).toList();
+    return searchnote;
+  }
+
+  @override
+  List<Note> sort() {
+    var notes = getAll();
+    notes.sort((a, b) => a.title.length.compareTo(b.title.length));
+    return notes;
+  }
+
+  @override
+  List<Note> getAll() {
+    List<String> paths = all();
+    List<Note> notes = [];
+    for (var path in paths) {
+      Note note = loadNote(path);
+      notes.add(note);
+    }
+    return notes;
+  }
+
+  List<String> all() {
+    var myDir = Directory(
+        r'C:\Users\PrachDen_95\Desktop\приложение заметок\pox\notes\');
+    List<String> note = [];
+    try {
+      for (var entity in myDir.listSync()) {
+        final not = entity.path;
+        note.add(not);
+      }
+    } catch (ex) {
+      print(ex);
+    }
     return note;
   }
 
   @override
   void delNote(int id) {
-    // TODO: implement delNote
-  }
-
-  @override
-  List<Note> searchTXT(String searchTXT) {
-    // TODO: implement searchTXT
-    throw UnimplementedError();
-  }
-
-  @override
-  List<Note> sort() {
-    // TODO: implement sort
-    throw UnimplementedError();
-  }
-
-  @override
-  List<Note> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+    var notes = getAll();
+    Note noteremove = notes.firstWhere((test) => test.id == id);
+    notes.remove(noteremove);
   }
 }
 
-void all() {
+List<String> all() {
   var myDir =
       Directory(r'C:\Users\PrachDen_95\Desktop\приложение заметок\pox\notes\');
+  List<String> note = [];
   try {
     for (var entity in myDir.listSync()) {
-      print(entity.path);
+      final not = entity.path;
+      note.add(not);
     }
   } catch (ex) {
     print(ex);
   }
+  return note;
 }
 
 Note loadNote(String path) {
@@ -69,8 +98,4 @@ Note loadNote(String path) {
   final decoded = json.decode(info);
   Note note_1 = Note.fromJson(decoded);
   return note_1;
-}
-
-void main(List<String> args) {
-  all();
 }
